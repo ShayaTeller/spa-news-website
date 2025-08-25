@@ -274,3 +274,22 @@ input[type="submit"]:hover {
     padding: 1.5rem;
   }
 }
+
+#iframe-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 120%;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#iframe-div iframe {
+  width: 70vw;
+  height: 100vh;
+  border: none;
+  border-radius: 8px;
+}

@@ -1,7 +1,7 @@
 const root = document.getElementById("root");
 let currentUser = null;
 
-links = ["home", "news", "addstory"];
+links = ["home", "news", "addstory","Contact us"];
 let aEveteClick = "";
 
 function jenrateNavBar(links) {
@@ -38,6 +38,10 @@ function pagesload(aEveteClick = "news") {
       updateDataFromLocalS();
       // dataUpdate();
       break;
+      case "Contact us":
+       page =  connecct()
+       root.append(page)
+        break;
 
     default:
       // page = homePage();
