@@ -30,9 +30,11 @@ function pagesload(aEveteClick = "news") {
       root.append(page);
       break;
     case "addstory":
-      page = createForm(root);
+      page = createNewsForm(root);
       console.log(page)
       root.append(page);
+      updateDataFromLocalS()
+      // dataUpdate();
 
     default:
       // page = homePage();

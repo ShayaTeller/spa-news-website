@@ -59,3 +59,5 @@ window.articlePage = function articlePage(element, article) {
   div.append(h1, h2, p, img);
   root.append(div);
 };
+
+

@@ -1,36 +1,80 @@
-window.createForm = function createForm(root) {
-  const mainDiv = document.createElement("div");
+window.createNewsForm = function createNewsForm(rootElement) {
+  const formContainer = document.createElement("div");
   const form = document.createElement("form");
-  const h1 = document.createElement("h1");
-  h1.textContent = "send hot news";
-  const author = createInputElemnt("author", "text", "author");
-  const title = createInputElemnt("title", "text", "title");
-  const description = createInputElemnt("description", "text", "description");
-  const content = createInputElemnt("content", "text", "content");
-  const urlToImage = createInputElemnt("urlToImage", "img", "urlToImage");
-  const submit = createInputElemnt("submit", "submit", "submit");
+
+  const formTitle = document.createElement("h1");
+  formTitle.textContent = "Send Hot News";
+
+  const authorField = createInputElement("author", "text", "Author");
+  const titleField = createInputElement("title", "text", "Title");
+  const descriptionField = createInputElement(
+    "description",
+    "text",
+    "Description"
+  );
+  const contentField = createInputElement("content", "text", "Content");
+  const imageUpload = createInputElement("urlImg","text","img url")
+  const submitButton = document.createElement("input")
+  submitButton.type = "submit";
+
   form.append(
-    h1,
-    ...author,
-    ...title,
-    ...description,
-    ...content,
-    ...urlToImage,
-    ...submit
+    formTitle,
+    ...authorField,
+    ...titleField,
+    ...descriptionField,
+    ...contentField,
+    ...imageUpload,
+    submitButton
   );
 
-  mainDiv.style.marginRight = "300px";
-  mainDiv.style.marginTop = "100px";
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(form);
+    const formValues = {};
+
+    formData.forEach((value, key) => {
+      formValues[key] = value;
+    });
+    let dataInLocalStorage = localStorage.getItem("formData");
+    dataInLocalStorage = dataInLocalStorage
+      ? JSON.parse(dataInLocalStorage)
+      : [];
+    dataInLocalStorage.push(formValues);
+    localStorage.setItem("formData", JSON.stringify(dataInLocalStorage));
+
+    form.reset();
 
 
 
-  
-  mainDiv.append(form);
-  return mainDiv;
-  saveInLocalStorege();
+    const successMessage = document.createElement("div");
+    successMessage.textContent = "✅ ההודעה נשלחה בהצלחה!";
+    successMessage.className = "success-message";
+    formContainer.appendChild(successMessage);
+
+    // הסרה אחרי 3 שניות באנימציה
+    setTimeout(() => {
+      successMessage.classList.add("hide");
+      setTimeout(() => successMessage.remove(), 500);
+    }, 3000);
+  });
+
+
+  formContainer.style.marginRight = "300px";
+  formContainer.style.marginTop = "100px";
+  formContainer.append(form);
+
+  return formContainer;
 };
 
-window.createInputElemnt = function createInputElemnt(name, type, textContent) {
+
+
+
+window.createInputElement = function createInputElement(
+  name,
+  type,
+  textContent
+) {
   const label = document.createElement("label");
   const input = document.createElement("input");
 
@@ -43,18 +87,21 @@ window.createInputElemnt = function createInputElemnt(name, type, textContent) {
   return [label, input];
 };
 
-window.saveInLocalStorege = function saveInLocalStorege() {
-  const form = document.getElementById("form");
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    localStorage.setItem("formData", JSON.stringify(data));
-  });
-}
+
+
+
+// window.saveInLocalStorege = function saveInLocalStorege() {
+//   const form = document.getElementById("form");
+//   form.addEventListener("submit", (e) => {
+//     e.preventDefault();
+//     const formData = new FormData(form);
+//     const data = {};
+//     formData.forEach((value, key) => {
+//       data[key] = value;
+//     });
+//     localStorage.setItem("formData", JSON.stringify(data));
+//   });
+// };
 
 //     "author": "אלי ברק",
 //     "title": "סטארטאפ ישראלי גייס 50 מיליון דולר",
