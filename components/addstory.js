@@ -1,5 +1,7 @@
 window.createNewsForm = function createNewsForm(rootElement) {
-  const formContainer = document.createElement("div");
+  const div = document.createElement("div");
+  div.id = "main-div";
+
   const form = document.createElement("form");
 
   const formTitle = document.createElement("h1");
@@ -13,8 +15,8 @@ window.createNewsForm = function createNewsForm(rootElement) {
     "Description"
   );
   const contentField = createInputElement("content", "text", "Content");
-  const imageUpload = createInputElement("urlImg","text","img url")
-  const submitButton = document.createElement("input")
+  const imageUpload = createInputElement("urlToImage", "text", "urlToImage");
+  const submitButton = document.createElement("input");
   submitButton.type = "submit";
 
   form.append(
@@ -45,12 +47,10 @@ window.createNewsForm = function createNewsForm(rootElement) {
 
     form.reset();
 
-
-
     const successMessage = document.createElement("div");
     successMessage.textContent = "✅ ההודעה נשלחה בהצלחה!";
     successMessage.className = "success-message";
-    formContainer.appendChild(successMessage);
+    div.appendChild(successMessage);
 
     // הסרה אחרי 3 שניות באנימציה
     setTimeout(() => {
@@ -59,16 +59,12 @@ window.createNewsForm = function createNewsForm(rootElement) {
     }, 3000);
   });
 
+  // formContainer.style.marginRight = "300px";
+  // formContainer.style.marginTop = "100px";
+  div.append(form);
 
-  formContainer.style.marginRight = "300px";
-  formContainer.style.marginTop = "100px";
-  formContainer.append(form);
-
-  return formContainer;
+  return div;
 };
-
-
-
 
 window.createInputElement = function createInputElement(
   name,
@@ -86,27 +82,3 @@ window.createInputElement = function createInputElement(
   label.textContent = textContent;
   return [label, input];
 };
-
-
-
-
-// window.saveInLocalStorege = function saveInLocalStorege() {
-//   const form = document.getElementById("form");
-//   form.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const formData = new FormData(form);
-//     const data = {};
-//     formData.forEach((value, key) => {
-//       data[key] = value;
-//     });
-//     localStorage.setItem("formData", JSON.stringify(data));
-//   });
-// };
-
-//     "author": "אלי ברק",
-//     "title": "סטארטאפ ישראלי גייס 50 מיליון דולר",
-//     "urlToImage": "https://picsum.photos/id/1074/400/250",
-//     "description": "חברת טכנולוגיה צעירה מתל אביב הצליחה לגייס סכום שיא בסבב B.",
-//     "content": "חברת סטארטאפ ישראלית מתחום הבינה המלאכותית הודיעה על גיוס מרשים של 50 מיליון דולר בסבב השקעות שני. ההשקעה צפויה לשמש להרחבת הפעילות לשווקים בינלאומיים, גיוס מאות עובדים נוספים ופיתוח טכנולוגיות חדשות. החברה מתכננת לפתוח מרכזי פיתוח נוספים באירופה ובארה״ב, ולבסס את מעמדה כחברה מובילה בתחום. המשקיעים הביעו אמון רב בפוטנציאל החברה, וציינו את הצוות המנוסה ואת הפתרונות החדשניים שהיא מציעה. מדובר בעוד דוגמה בולטת ליכולת של חברות ישראליות להתחרות בהצלחה בזירה הגלובלית.",
-//     "url": "https://example.com/news/startup"
-//   }

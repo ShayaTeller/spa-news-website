@@ -1,4 +1,6 @@
 const root = document.getElementById("root");
+let currentUser = null;
+
 links = ["home", "news", "addstory"];
 let aEveteClick = "";
 
@@ -13,6 +15,7 @@ function jenrateNavBar(links) {
     a.textContent = link;
     nav.append(a);
   });
+
   return nav;
 }
 
@@ -31,10 +34,10 @@ function pagesload(aEveteClick = "news") {
       break;
     case "addstory":
       page = createNewsForm(root);
-      console.log(page)
       root.append(page);
-      updateDataFromLocalS()
+      updateDataFromLocalS();
       // dataUpdate();
+      break;
 
     default:
       // page = homePage();
