@@ -7,7 +7,6 @@ window.newsPage = function newsPage() {
 
   div.append(newsCard());
 
-  // div.append(newsCard());
   return div;
 };
 
