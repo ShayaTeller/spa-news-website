@@ -34,7 +34,6 @@ window.newsCard = function newsCard() {
       const title = e.currentTarget.querySelector("h1").textContent;
       console.log(title);
       articlePage(element, article);
-      //articalPage(e.target.id)
     });
     main.append(article);
   });
